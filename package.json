@@ -1,0 +1,11 @@
+{
+  "name": "react-todo",
+  "version": "1.0.0",
+  "description": "Todo App using MERN",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "James McNeil",
+  "license": "MIT"
+}
