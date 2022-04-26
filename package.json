@@ -4,7 +4,8 @@
   "description": "Todo App using MERN",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
   },
   "author": "James McNeil",
   "license": "MIT",
@@ -12,5 +13,8 @@
     "dotenv": "^16.0.0",
     "express": "^4.18.0",
     "mongoose": "^6.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
