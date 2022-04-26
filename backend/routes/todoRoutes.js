@@ -1,18 +1,13 @@
 const express = require('express') // import express (common js syntax)
-
 const router = express.Router() // initiate express Router as router variable
+const {
+  getTodos,
+  addTodo,
+  updateTodo,
+  deleteTodo,
+} = require('../contollers/todoController')
 
-router.get('/', (req, res) => {
-  res.status(200).json({ message: 'GET todos from routes' }) // fetch todos
-})
-router.post('/', (req, res) => {
-  res.status(200).json({ message: 'POST todos from routes' }) // add todos
-})
-router.put('/', (req, res) => {
-  res.status(200).json({ message: 'PUT todos from routes' }) //update todos
-})
-router.delete('/', (req, res) => {
-  res.status(200).json({ message: 'DELETE todos from routes' }) // delete todos
-})
+router.route('/').get(getTodos).post(addTodo) // use contoller function for GET and POST methods
+router.route('/:id').put(updateTodo).delete(deleteTodo) // use contoller function for PUT  and DELETE methods
 
 module.exports = router // export router
