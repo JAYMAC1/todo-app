@@ -21,25 +21,39 @@ const addTodo = asyncHandler(async (req, res) => {
   const todo = await Todo.create({
     description: req.body.description,
   })
-  res.status(200).json({ message: 'POST todos from controller' }) // add todos
+  res.status(200).json(todo) // add todos
 })
 
 // @desc    controller to fetch todos
 // @route   PUT /api/todos
 // @access  Private
 const updateTodo = asyncHandler(async (req, res) => {
-  res
-    .status(200)
-    .json({ message: `PUT updates todo ${req.params.id} from controller` }) //update todos
+  const todo = await Todo.findById(req.params.id)
+
+  if (!todo) {
+    res.status(400)
+    throw new Error('Todo not found')
+  }
+
+  const updatedTodo = await Todo.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  })
+
+  res.status(200).json(updatedTodo) //update todos
 })
 
 // @desc    controller to fetch todos
 // @route   DELETE /api/todos
 // @access  Private
 const deleteTodo = asyncHandler(async (req, res) => {
-  res
-    .status(200)
-    .json({ message: `DELETE todo ${req.params.id} from controller` }) // delete todos
+  const todo = await Todo.findById(req.params.id)
+
+  if (!todo) {
+    res.status(400)
+    throw new Error('Todo not found')
+  }
+  await todo.remove()
+  res.status(200).json({ id: req.params.id })
 })
 
 module.exports = {
