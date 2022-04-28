@@ -8,6 +8,9 @@ connectDB() // Initiate mongoose connection to MongoDB
 
 const app = express() // initiate express application on app
 
+app.use(express.json()) // parse body where JSON
+app.use(express.urlencoded({ extended: false })) // parse body where urlEncoded
+
 app.use('/api/todos', require('./routes/todoRoutes')) // direct /api/todos to todoRoutes router
 app.use(errorHandler) // set express application to use custom error handling middleware
 
