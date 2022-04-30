@@ -15,6 +15,7 @@ app.use(errorHandler) // set express application to use custom error handling mi
 
 /* ### Routes ###  */
 app.use('/api/todos', require('./routes/todoRoutes')) // direct /api/todos to todoRoutes router
+app.use('/api/users', require('./routes/userRoutes')) // direct /api/user to userRoutes router
 
 app.listen(PORT, () => {
   console.log(`server started om port: ${PORT}`) // set app to listen on specified port
