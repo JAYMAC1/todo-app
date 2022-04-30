@@ -3,6 +3,11 @@ const mongoose = require('mongoose') // Import mongoose package
 // create mongoose Schema (todoSchema)
 const todoSchema = mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
     // field name
     description: {
       type: String, // feild type
