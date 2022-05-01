@@ -43,8 +43,62 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc    Authenicate a user
+// @route   POST /api/users/login
+// @access  Public
+const loginUser = asyncHandler(async (req, res) => {
+  // destructure data sent in the body
+  const { email, password } = req.body
+
+  // Check if user exisits
+  const user = await User.findOne({ email })
+  if (user /*&& (await bcrypt.compare(password, user.password))*/) {
+    res.status(200).json({
+      _id: user.id,
+      name: user.name,
+      email: user.email,
+    })
+    // res.status(200).json({
+    //   _id: user.id,
+    //   name: user.name,
+    //   email: user.email,
+    //   token: generateToken(user._id),
+    // })
+  } else {
+    res.status(400)
+    throw new Error('invalid Credentials')
+  }
+})
+
+// @desc    Authenicate a user
+// @route   POST /api/users/login
+// @access  Public
+const getUser = asyncHandler(async (req, res) => {
+  // destructure data sent in the body
+  const { email } = req.body
+
+  // Check if user exisits
+  const user = await User.findOne({ email })
+  if (user /*&& (await bcrypt.compare(password, user.password))*/) {
+    res.status(200).json({
+      _id: user.id,
+      name: user.name,
+      email: user.email,
+    })
+    // res.status(200).json({
+    //   _id: user.id,
+    //   name: user.name,
+    //   email: user.email,
+    //   token: generateToken(user._id),
+    // })
+  } else {
+    res.status(400)
+    throw new Error('No user found')
+  }
+})
+
 module.exports = {
   registerUser,
-  // loginUser,
-  // getMe,
+  loginUser,
+  getUser,
 }
