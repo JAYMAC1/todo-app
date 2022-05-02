@@ -6,8 +6,11 @@ const {
   loginUser,
   getUser,
 } = require('../contollers/userController')
+
+const { protect } = require('../middleware/authMiddleware') //import the protect function from authMiddleware
+
 router.post('/', registerUser)
 router.post('/login', loginUser)
-router.post('/me', getUser)
+router.post('/me', protect, getUser)
 
 module.exports = router
